@@ -1,0 +1,17 @@
+{
+	"name": "insertingbatchid",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "linkedserveiceforlightdb",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Batch_Header"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

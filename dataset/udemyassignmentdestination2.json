@@ -1,0 +1,17 @@
+{
+	"name": "udemyassignmentdestination2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "linkedserveiceforlightdb",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "salesdata"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

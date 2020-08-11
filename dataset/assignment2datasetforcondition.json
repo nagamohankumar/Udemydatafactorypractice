@@ -1,0 +1,13 @@
+{
+	"name": "assignment2datasetforcondition",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "linkedserveiceforlightdb",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

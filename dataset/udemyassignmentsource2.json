@@ -1,0 +1,13 @@
+{
+	"name": "udemyassignmentsource2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "linkedserviceSQLdatabase",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,34 @@
+{
+	"name": "newmodifieddatedataset",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "linkedserveiceforlightdb",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "tablename",
+				"type": "varchar"
+			},
+			{
+				"name": "Modified_date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "createddate",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Source_tbl"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

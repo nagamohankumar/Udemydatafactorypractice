@@ -1,0 +1,184 @@
+{
+	"name": "incremental_data_pull_copy1",
+	"properties": {
+		"activities": [
+			{
+				"name": "Lookupoldactivitydate",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "oldmodifieddatedataset",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": true
+				}
+			},
+			{
+				"name": "Lookupnewactivitydate",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "select MAX(Modified_date) as NewWatermarkvalue from Source_tbl",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "newmodifieddatedataset",
+						"type": "DatasetReference"
+					}
+				}
+			},
+			{
+				"name": "incrementalcopyactivity",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Lookupoldactivitydate",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Lookupnewactivitydate",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": {
+							"value": "select * from Source_tbl where Modified_date > '@{activity('Lookupoldactivitydate').output.firstRow.Last_Max_date}' and Modified_date <= '@{activity('Lookupnewactivitydate').output.firstRow.NewWatermarkvalue}'\n",
+							"type": "Expression"
+						},
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "newmodifieddatedataset",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "destinationfiledataset",
+						"type": "DatasetReference",
+						"parameters": {
+							"datasetfilenamedestination": {
+								"value": "@concat(pipeline().parameters.filenamedestination,'_',pipeline().RunId,'.txt')",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			},
+			{
+				"name": "Stored procedureactivity",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "incrementalcopyactivity",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[usp_write_watermark]",
+					"storedProcedureParameters": {
+						"LastModifiedtime": {
+							"value": {
+								"value": "@{activity('Lookupnewactivitydate').output.firstRow.NewWatermarkvalue}",
+								"type": "Expression"
+							},
+							"type": "Datetime"
+						},
+						"TableName": {
+							"value": {
+								"value": "@{activity('Lookupoldactivitydate').output.firstRow.Table_Name}",
+								"type": "Expression"
+							},
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "linkedserveiceforlightdb",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"parameters": {
+			"filenamedestination": {
+				"type": "string",
+				"defaultValue": "Source_tbl"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2020-07-29T09:20:10Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

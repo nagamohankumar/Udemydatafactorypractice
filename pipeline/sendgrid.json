@@ -1,0 +1,96 @@
+{
+	"name": "sendgrid",
+	"properties": {
+		"activities": [
+			{
+				"name": "Web1",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://prod-51.eastus.logic.azure.com:443/workflows/25692d91d4224d538d846123271f83ca/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=D3xIDsbfM9BsbGGiFJUIsBD_cEbioVCEqVqgZZ7d4Ic",
+					"method": "POST",
+					"headers": {
+						"content-type": "application/json"
+					},
+					"body": {
+						"value": "{\n    \"DataFactoryName\":\n        \"pipeline().parameters.Datafactoryname\",\n    \"PipelineName\":\n        \"pipeline().parameters.pipelinename\",\n    \"ErrorMessage\":\n        \"pipeline().parameters.Errormessage\",\n    \"EmailTo\":\n        \"Nagamohana.Rajulapati@kantar.com\"\n}",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Web1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "RestSource",
+						"httpRequestTimeout": "00:01:40",
+						"requestInterval": "00.00:00:00.010",
+						"requestMethod": "GET"
+					},
+					"sink": {
+						"type": "JsonSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "JsonWriteSettings",
+							"quoteAllText": true
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "Restapidataset",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "restapijson",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"parameters": {
+			"Datafactoryname": {
+				"type": "string"
+			},
+			"pipelinename": {
+				"type": "string"
+			},
+			"Errormessage": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2020-08-11T07:14:23Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

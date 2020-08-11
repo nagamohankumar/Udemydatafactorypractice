@@ -1,0 +1,33 @@
+{
+	"name": "oldmodifieddatedataset",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "linkedserveiceforlightdb",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Table_Name",
+				"type": "varchar"
+			},
+			{
+				"name": "Last_Max_date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Pull_master"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

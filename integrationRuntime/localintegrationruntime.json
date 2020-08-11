@@ -1,0 +1,7 @@
+{
+	"name": "localintegrationruntime",
+	"properties": {
+		"type": "SelfHosted",
+		"description": "to get the local files"
+	}
+}

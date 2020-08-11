@@ -1,0 +1,39 @@
+{
+	"name": "lightdbbatchid",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "linkedserveiceforlightdb",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "BHID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Start_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "End_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Status",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Batch_Header"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

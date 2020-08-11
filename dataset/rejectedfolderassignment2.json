@@ -1,0 +1,32 @@
+{
+	"name": "rejectedfolderassignment2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStoragemultifiles",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"rejectedfolder": {
+				"type": "string",
+				"defaultValue": "none"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().rejectedfolder",
+					"type": "Expression"
+				},
+				"fileSystem": "assignment2rejectedfolder"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
