@@ -4,6 +4,7 @@
 		"activities": [
 			{
 				"name": "Web1",
+				"description": "rest api web activity",
 				"type": "WebActivity",
 				"dependsOn": [],
 				"policy": {
