@@ -273,15 +273,15 @@
 								},
 								"waitOnCompletion": true,
 								"parameters": {
-									"Datafactoryname": {
+									"DataFactoryName": {
 										"value": "@pipeline().DataFactory",
 										"type": "Expression"
 									},
-									"pipelinename": {
+									"PipelineName": {
 										"value": "@pipeline().Pipeline",
 										"type": "Expression"
 									},
-									"Errormessage": {
+									"ErrorMessage": {
 										"value": "@activity('Lookup1').output.value[0].reson",
 										"type": "Expression"
 									}

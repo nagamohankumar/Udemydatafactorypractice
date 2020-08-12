@@ -22,7 +22,7 @@
 						"content-type": "application/json"
 					},
 					"body": {
-						"value": "{\n    \"DataFactoryName\":\n        \"pipeline().parameters.Datafactoryname\",\n    \"PipelineName\":\n        \"pipeline().parameters.pipelinename\",\n    \"ErrorMessage\":\n        \"pipeline().parameters.Errormessage\",\n    \"EmailTo\":\n        \"Nagamohana.Rajulapati@kantar.com\"\n}",
+						"value": "{\n    \"DataFactoryName\":\n        \"@pipeline().parameters.DataFactoryName\",\n    \"PipelineName\":\n        \"@pipeline().parameters.PipelineName\",\n    \"ErrorMessage\":\n        \"@pipeline().parameters.ErrorMessage\",\n    \"EmailTo\":\n        \"Nagamohana.Rajulapati@kantar.com\"\n}",
 						"type": "Expression"
 					}
 				}
@@ -80,13 +80,13 @@
 			}
 		],
 		"parameters": {
-			"Datafactoryname": {
+			"DataFactoryName": {
 				"type": "string"
 			},
-			"pipelinename": {
+			"PipelineName": {
 				"type": "string"
 			},
-			"Errormessage": {
+			"ErrorMessage": {
 				"type": "string"
 			}
 		},
