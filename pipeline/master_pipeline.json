@@ -284,6 +284,14 @@
 									"ErrorMessage": {
 										"value": "@activity('Lookup1').Error.message",
 										"type": "Expression"
+									},
+									"BHIDfailed": {
+										"value": "@pipeline().parameters.Batchid",
+										"type": "Expression"
+									},
+									"pipelinefailed": {
+										"value": "@pipeline().Pipeline",
+										"type": "Expression"
 									}
 								}
 							}
