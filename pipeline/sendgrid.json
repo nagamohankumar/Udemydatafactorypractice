@@ -26,7 +26,7 @@
 					"url": "https://prod-51.eastus.logic.azure.com:443/workflows/25692d91d4224d538d846123271f83ca/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=D3xIDsbfM9BsbGGiFJUIsBD_cEbioVCEqVqgZZ7d4Ic",
 					"method": "POST",
 					"headers": {
-						"content-type": "application/json"
+						"Content-Type": "application/json"
 					},
 					"body": {
 						"value": "{\n    \"DataFactoryName\":\n        \"@pipeline().parameters.DataFactoryName\",\n    \"PipelineName\":\n        \"@pipeline().parameters.PipelineName\",\n    \"ErrorMessage\":\n        \"@pipeline().parameters.ErrorMessage\",\n    \"EmailTo\":\n        \"Nagamohana.Rajulapati@kantar.com\"\n}",
