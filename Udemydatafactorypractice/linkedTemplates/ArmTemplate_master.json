@@ -1,0 +1,145 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "Udemydatafactorypractice"
+		},
+		"AzureDataLakeStoragemultifiles_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStoragemultifiles'"
+		},
+		"destinationlinkedservice_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'destinationlinkedservice'"
+		},
+		"linkedserveiceforlightdb_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'linkedserveiceforlightdb'"
+		},
+		"linkedserviceSQLdatabase_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'linkedserviceSQLdatabase'"
+		},
+		"linkedservicedatalakestorage_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'linkedservicedatalakestorage'"
+		},
+		"AzureDataLakeStoragemultifiles_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://udemypracticedatalake.dfs.core.windows.net"
+		},
+		"RestAPI_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "http://dummy.restapiexample.com/api/v1/employees"
+		},
+		"destinationlinkedservice_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://udemypracticedatalake.dfs.core.windows.net"
+		},
+		"linkedservicedatalakestorage_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://udemypracticedatalake.dfs.core.windows.net"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AzureDataLakeStoragemultifiles_accountKey": {
+						"value": "[parameters('AzureDataLakeStoragemultifiles_accountKey')]"
+					},
+					"destinationlinkedservice_accountKey": {
+						"value": "[parameters('destinationlinkedservice_accountKey')]"
+					},
+					"linkedserveiceforlightdb_connectionString": {
+						"value": "[parameters('linkedserveiceforlightdb_connectionString')]"
+					},
+					"linkedserviceSQLdatabase_connectionString": {
+						"value": "[parameters('linkedserviceSQLdatabase_connectionString')]"
+					},
+					"linkedservicedatalakestorage_accountKey": {
+						"value": "[parameters('linkedservicedatalakestorage_accountKey')]"
+					},
+					"AzureDataLakeStoragemultifiles_properties_typeProperties_url": {
+						"value": "[parameters('AzureDataLakeStoragemultifiles_properties_typeProperties_url')]"
+					},
+					"RestAPI_properties_typeProperties_url": {
+						"value": "[parameters('RestAPI_properties_typeProperties_url')]"
+					},
+					"destinationlinkedservice_properties_typeProperties_url": {
+						"value": "[parameters('destinationlinkedservice_properties_typeProperties_url')]"
+					},
+					"linkedservicedatalakestorage_properties_typeProperties_url": {
+						"value": "[parameters('linkedservicedatalakestorage_properties_typeProperties_url')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ArmTemplate_1')]"
+			]
+		}
+	]
+}

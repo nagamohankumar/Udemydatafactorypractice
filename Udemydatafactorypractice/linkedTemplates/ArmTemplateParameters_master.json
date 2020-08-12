@@ -1,0 +1,42 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "Udemydatafactorypractice"
+		},
+		"AzureDataLakeStoragemultifiles_accountKey": {
+			"value": ""
+		},
+		"destinationlinkedservice_accountKey": {
+			"value": ""
+		},
+		"linkedserveiceforlightdb_connectionString": {
+			"value": ""
+		},
+		"linkedserviceSQLdatabase_connectionString": {
+			"value": ""
+		},
+		"linkedservicedatalakestorage_accountKey": {
+			"value": ""
+		},
+		"AzureDataLakeStoragemultifiles_properties_typeProperties_url": {
+			"value": "https://udemypracticedatalake.dfs.core.windows.net"
+		},
+		"RestAPI_properties_typeProperties_url": {
+			"value": "http://dummy.restapiexample.com/api/v1/employees"
+		},
+		"destinationlinkedservice_properties_typeProperties_url": {
+			"value": "https://udemypracticedatalake.dfs.core.windows.net"
+		},
+		"linkedservicedatalakestorage_properties_typeProperties_url": {
+			"value": "https://udemypracticedatalake.dfs.core.windows.net"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
