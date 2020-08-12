@@ -1598,10 +1598,6 @@
 												"value": "@pipeline().Pipeline",
 												"type": "Expression"
 											},
-											"ErrorMessage": {
-												"value": "@activity('Lookup1').Error",
-												"type": "Expression"
-											},
 											"BHIDfailed": {
 												"value": "@pipeline().parameters.Batchid",
 												"type": "Expression"
