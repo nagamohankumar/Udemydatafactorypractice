@@ -259,9 +259,9 @@
 							"type": "ExecutePipeline",
 							"dependsOn": [
 								{
-									"activity": "If Condition1",
+									"activity": "Lookup1",
 									"dependencyConditions": [
-										"Succeeded"
+										"Failed"
 									]
 								}
 							],
@@ -282,7 +282,7 @@
 										"type": "Expression"
 									},
 									"ErrorMessage": {
-										"value": "@activity('Lookup1').output.value[0].reson",
+										"value": "@activity('Lookup1').message",
 										"type": "Expression"
 									}
 								}
