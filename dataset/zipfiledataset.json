@@ -13,7 +13,7 @@
 				"fileSystem": "newgzip"
 			},
 			"columnDelimiter": ",",
-			"compressionCodec": "gzip",
+			"compressionCodec": "deflate",
 			"compressionLevel": "Optimal",
 			"escapeChar": "\\",
 			"quoteChar": "\""
