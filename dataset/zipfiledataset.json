@@ -1,0 +1,22 @@
+{
+	"name": "zipfiledataset",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "zipfilestoragelinkedserveice",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "newgzip"
+			},
+			"columnDelimiter": ",",
+			"compressionCodec": "gzip",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
