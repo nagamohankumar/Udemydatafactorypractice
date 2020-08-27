@@ -10,7 +10,6 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "data_966070e2-37b6-4c42-ab9e-847c60916e1d_0ac4d961-d7ed-4a48-9b0f-3d6bedd34439.zip",
 				"fileSystem": "newblob"
 			},
 			"columnDelimiter": ",",
