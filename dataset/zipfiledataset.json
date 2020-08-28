@@ -14,7 +14,7 @@
 			},
 			"columnDelimiter": ",",
 			"compressionCodec": "deflate",
-			"compressionLevel": "Optimal",
+			"compressionLevel": "Fastest",
 			"escapeChar": "\\",
 			"quoteChar": "\""
 		},
