@@ -1,0 +1,21 @@
+{
+	"name": "unzipdestination",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStoragemultifiles",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "unzippedfiles"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
